@@ -1,0 +1,38 @@
+name: Deploy to Oracle Cloud
+
+on:
+
+  workflow_dispatch:
+    inputs:
+      start_deploy:
+        type: boolean
+        description: Are you sure to start this action?
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+
+  ansible_playbook:
+
+    name: 'Run Ansible Playbook'
+    if: github.event.inputs.start_deploy
+    runs-on: ubuntu-latest
+    environment: ansible
+
+    steps:
+    - name: Checkout Git Repository
+      uses: actions/checkout@v3
+
+    - name: Run Playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: playbook.yml
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        inventory: |
+          [all]
+          ${{ secrets.MACHINE_PUBLIC_IP }} ansible_user=${{ secrets.MACHINE_USER }}
+        options: |
+          --extra-vars discord_token=${{ secrets.DISCORD_APP_TOKEN }}
+          --verbose

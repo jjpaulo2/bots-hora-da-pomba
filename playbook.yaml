@@ -1,0 +1,55 @@
+---
+- name: Run Evobot on Oracle Cloud machine
+  hosts: all
+  become: true
+
+  vars:
+    repo_url: https://github.com/eritislami/evobot.git
+    repo_branch: master
+    clone_path: /srv/evobot
+    container_name: cleiton-rasta-bot
+    evobot_max_playlist_size: 100
+    evobot_locale: pt_br
+    evobot_default_volume: 25
+    evobot_stay_time: 10
+
+  vars_prompt:
+    - name: discord_token
+      private: false
+      prompt: "Enter de DISCORD_APP_TOKEN"
+      salt_size: 8
+      unsafe: false
+
+  tasks:
+
+  - name: Install podman
+    ansible.builtin.dnf:
+      pkg:
+        - podman
+        - podman-catatonit
+        - podman-docker
+      state: latest
+      update_cache: true
+
+  - name: Clone repository
+    ansible.builtin.git:
+      repo: "{{ repo_url }}"
+      dest: "{{ clone_path }}"
+      version: "{{ repo_branch }}"
+
+  - name: Build container image
+    containers.podman.podman_image:
+      name: "{{ container_name }}"
+      path: "{{ clone_path }}"
+  
+  - name: Run container
+    containers.podman.podman_container:
+      name: "{{ container_name }}"
+      image: "{{ container_name }}"
+      state: started
+      env:
+        TOKEN: "{{ discord_token }}"
+        MAX_PLAYLIST_SIZE: "{{ evobot_max_playlist_size }}"
+        LOCALE: "{{ evobot_locale }}"
+        DEFAULT_VOLUME: "{{ evobot_default_volume }}"
+        STAY_TIME: "{{ evobot_stay_time }}"

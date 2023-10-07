@@ -23,14 +23,9 @@
 
   tasks:
 
-  - name: Install podman
-    ansible.builtin.dnf:
-      pkg:
-        - podman
-        - podman-catatonit
-        - podman-docker
-      state: latest
-      update_cache: true
+  - name: Prune everything
+    containers.podman.podman_prune:
+      system: true
 
   - name: Clone repository
     ansible.builtin.git:

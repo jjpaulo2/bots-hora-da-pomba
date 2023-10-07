@@ -2,6 +2,7 @@
 - name: Run Evobot on Oracle Cloud machine
   hosts: all
   become: true
+  gather_facts: false
 
   vars:
     repo_url: https://github.com/eritislami/evobot.git

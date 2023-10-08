@@ -57,7 +57,7 @@
       path: "{{ clone_path }}"
   
   - name: Run container
-    async: 60
+    async: 360
     poll: 1
     containers.podman.podman_container:
       name: "{{ container_name }}"

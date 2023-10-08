@@ -50,7 +50,7 @@
       version: "{{ repo_branch }}"
 
   - name: Build container image
-    async: 360
+    async: 1000
     poll: 1
     containers.podman.podman_image:
       name: "{{ container_name }}"

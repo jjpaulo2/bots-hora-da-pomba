@@ -6,7 +6,7 @@
 
   vars:
     repo_url: https://github.com/eritislami/evobot.git
-    repo_branch: master
+    repo_branch: 2.8.1
     clone_path: /srv/evobot
     container_name: cleiton-rasta-bot
     evobot_max_playlist_size: 100

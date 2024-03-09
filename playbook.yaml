@@ -23,18 +23,6 @@
 
   tasks:
 
-  - name: Install podman
-    async: 180
-    poll: 1
-    ansible.builtin.dnf:
-      pkg:
-        - podman
-        - podman-catatonit
-        - podman-docker
-      state: latest
-      update_cache: true
-      
-
   - name: Prune everything
     async: 30
     poll: 1

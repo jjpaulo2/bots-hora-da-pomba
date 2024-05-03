@@ -5,15 +5,15 @@
   gather_facts: false
 
   vars:
-    copy_origin_path: ../build/evobot.tar.gz
-    copy_destiny_path: /home/ubuntu/containers/evobot.tar.gz
-    image_version: 2.8.1
-    image_name: evobot
-    container_name: cleiton-rasta-bot
-    evobot_max_playlist_size: 100
-    evobot_locale: pt_br
-    evobot_default_volume: 15
-    evobot_stay_time: 10
+    copy_origin_path: "../build/evobot.tar.gz"
+    copy_destiny_path: "/home/ubuntu/containers/evobot.tar.gz"
+    image_version: "2.8.1"
+    image_name: "evobot"
+    container_name: "cleiton-rasta-bot"
+    evobot_max_playlist_size: "100"
+    evobot_locale: "pt_br"
+    evobot_default_volume: "15"
+    evobot_stay_time: "10"
 
   vars_prompt:
     - name: discord_token

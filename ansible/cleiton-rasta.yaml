@@ -48,6 +48,7 @@
       name: "{{ container_name }}"
       image: "{{ container_name }}"
       state: started
+      restart_policy: always
       env:
         TOKEN: "{{ discord_token }}"
         MAX_PLAYLIST_SIZE: "{{ evobot_max_playlist_size }}"

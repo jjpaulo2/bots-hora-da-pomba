@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    copy_origin_path: build/evobot.tar.gz
+    copy_origin_path: ../build/evobot.tar.gz
     copy_destiny_path: /home/ubuntu/containers/evobot.tar.gz
     container_name: cleiton-rasta-bot
     evobot_max_playlist_size: 100

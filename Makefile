@@ -1,7 +1,7 @@
 EVOBOT_REPO = https://github.com/eritislami/evobot.git
 AOEDE_REPO = https://github.com/codetheweb/aoede.git
 EVOBOT_VERSION = 2.8.1
-AOEDE_VERSION = 0.7.1
+AOEDE_VERSION = v0.7.1
 BUILD_DIR = build
 
 evobot.tar.gz:

@@ -41,7 +41,7 @@
     poll: 1
     community.docker.docker_container:
       name: "{{ container_name }}"
-      image: "{{ container_name }}"
+      image: "{{ image_name }}"
       state: started
       restart_policy: always
       env:

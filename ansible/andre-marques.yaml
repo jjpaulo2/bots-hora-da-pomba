@@ -5,9 +5,8 @@
   gather_facts: false
 
   vars:
-    repo_url: https://github.com/codetheweb/aoede.git
-    repo_branch: 0.7.1
-    clone_path: /srv/aoede
+    copy_origin_path: build/aoede.tar.gz
+    copy_destiny_path: /home/ubuntu/containers/aoede.tar.gz
     container_name: andre-marques-bot
     spotify_bot_autoplay: false
 
@@ -32,24 +31,16 @@
 
   tasks:
 
-  - name: Clone repository
-    async: 60
-    poll: 1
-    ansible.builtin.git:
-      repo: "{{ repo_url }}"
-      dest: "{{ clone_path }}"
-      version: "{{ repo_branch }}"
-
-  - name: Build container image
-    async: 1000
-    poll: 1
-    community.docker.docker_image:
-      name: "{{ container_name }}"
-      tag: latest
-      source: build
-      build:
-        path: "{{ clone_path }}"
+  - name: Copy docker image
+    ansible.builtin.copy:
+      src: "{{ copy_origin_path }}"
+      dest: "{{ copy_destiny_path }}"
   
+  - name: Load image
+    community.docker.docker_image:
+      load_path: "{{ copy_destiny_path }}"
+      source: load
+
   - name: Run container
     async: 360
     poll: 1

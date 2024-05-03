@@ -25,6 +25,9 @@ jobs:
     - name: Checkout Git Repository
       uses: actions/checkout@v3
 
+    - name: Compilando imagem do Cleiton Rasta
+      run: make evobot.tar.gz
+
     - name: Rodando Cleiton Rasta
       uses: dawidd6/action-ansible-playbook@v2
       with:
@@ -36,6 +39,9 @@ jobs:
         options: |
           --extra-vars discord_token=${{ secrets.CLEITON_RASTA_DISCORD_TOKEN }}
           --verbose
+
+    - name: Compilando imagem do André Marques
+      run: make aoede.tar.gz
 
     - name: Rodando André Marques
       uses: dawidd6/action-ansible-playbook@v2

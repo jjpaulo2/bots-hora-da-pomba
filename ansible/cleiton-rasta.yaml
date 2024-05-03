@@ -5,9 +5,8 @@
   gather_facts: false
 
   vars:
-    repo_url: https://github.com/eritislami/evobot.git
-    repo_branch: 2.8.1
-    clone_path: /srv/evobot
+    copy_origin_path: build/evobot.tar.gz
+    copy_destiny_path: /home/ubuntu/containers/evobot.tar.gz
     container_name: cleiton-rasta-bot
     evobot_max_playlist_size: 100
     evobot_locale: pt_br
@@ -23,23 +22,15 @@
 
   tasks:
 
-  - name: Clone repository
-    async: 60
-    poll: 1
-    ansible.builtin.git:
-      repo: "{{ repo_url }}"
-      dest: "{{ clone_path }}"
-      version: "{{ repo_branch }}"
+  - name: Copy docker image
+    ansible.builtin.copy:
+      src: "{{ copy_origin_path }}"
+      dest: "{{ copy_destiny_path }}"
 
-  - name: Build container image
-    async: 1000
-    poll: 1
+  - name: Load image
     community.docker.docker_image:
-      name: "{{ container_name }}"
-      tag: latest
-      source: build
-      build:
-        path: "{{ clone_path }}"
+      load_path: "{{ copy_destiny_path }}"
+      source: load
   
   - name: Run container
     async: 360

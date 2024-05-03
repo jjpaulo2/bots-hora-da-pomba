@@ -34,14 +34,14 @@
   - name: Build container image
     async: 1000
     poll: 1
-    containers.docker.docker_image:
+    community.docker.docker_image:
       name: "{{ container_name }}"
       path: "{{ clone_path }}"
   
   - name: Run container
     async: 360
     poll: 1
-    containers.docker.docker_container:
+    community.docker.docker_container:
       name: "{{ container_name }}"
       image: "{{ container_name }}"
       state: started
@@ -55,5 +55,5 @@
   - name: Clean docker old images
     async: 30
     poll: 1
-    containers.docker.docker_prune:
+    community.docker.docker_prune:
       images: true

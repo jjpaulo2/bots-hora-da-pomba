@@ -28,7 +28,7 @@ jobs:
     - name: Rodando Cleiton Rasta
       uses: dawidd6/action-ansible-playbook@v2
       with:
-        playbook: cleiton-rasta.yaml
+        playbook: ansible/cleiton-rasta.yaml
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         inventory: |
           [all]
@@ -40,11 +40,13 @@ jobs:
     - name: Rodando André Marques
       uses: dawidd6/action-ansible-playbook@v2
       with:
-        playbook: andre-marques.yaml
+        playbook: ansible/andre-marques.yaml
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         inventory: |
           [all]
           ${{ secrets.MACHINE_PUBLIC_IP }} ansible_user=${{ secrets.MACHINE_USER }}
         options: |
           --extra-vars discord_token=${{ secrets.ANDRE_MARQUES_DISCORD_TOKEN }}
+          --extra-vars spotify_username=${{ secrets.SPOTIFY_USERNAME }}
+          --extra-vars spotify_password=${{ secrets.SPOTIFY_PASSWORD }}
           --verbose

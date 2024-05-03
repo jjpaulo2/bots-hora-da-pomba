@@ -1,5 +1,5 @@
 ---
-- name: Run Evobot on Oracle Cloud machine
+- name: Run Evobot in docker container
   hosts: all
   become: true
   gather_facts: false
@@ -11,23 +11,17 @@
     container_name: cleiton-rasta-bot
     evobot_max_playlist_size: 100
     evobot_locale: pt_br
-    evobot_default_volume: 25
+    evobot_default_volume: 15
     evobot_stay_time: 10
 
   vars_prompt:
     - name: discord_token
       private: false
-      prompt: "Enter de DISCORD_APP_TOKEN"
+      prompt: "Enter the DISCORD_APP_TOKEN"
       salt_size: 8
       unsafe: false
 
   tasks:
-
-  - name: Prune everything
-    async: 30
-    poll: 1
-    containers.podman.podman_prune:
-      system: true
 
   - name: Clone repository
     async: 60
@@ -40,14 +34,14 @@
   - name: Build container image
     async: 1000
     poll: 1
-    containers.podman.podman_image:
+    containers.docker.docker_image:
       name: "{{ container_name }}"
       path: "{{ clone_path }}"
   
   - name: Run container
     async: 360
     poll: 1
-    containers.podman.podman_container:
+    containers.docker.docker_container:
       name: "{{ container_name }}"
       image: "{{ container_name }}"
       state: started
@@ -57,3 +51,9 @@
         LOCALE: "{{ evobot_locale }}"
         DEFAULT_VOLUME: "{{ evobot_default_volume }}"
         STAY_TIME: "{{ evobot_stay_time }}"
+  
+  - name: Clean docker old images
+    async: 30
+    poll: 1
+    containers.docker.docker_prune:
+      images: true

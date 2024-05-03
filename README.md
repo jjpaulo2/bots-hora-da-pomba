@@ -1,8 +1,12 @@
-# Cleiton Rasta Bot
+# Bots do servidor Hora da Pomba
 
-[![Deploy to Oracle Cloud](https://github.com/jjpaulo2/cleiton-rasta-bot/actions/workflows/deploy.yaml/badge.svg)](https://github.com/jjpaulo2/cleiton-rasta-bot/actions/workflows/deploy.yaml)
+[![Deploy](https://github.com/jjpaulo2/cleiton-rasta-bot/actions/workflows/deploy.yaml/badge.svg)](https://github.com/jjpaulo2/cleiton-rasta-bot/actions/workflows/deploy.yaml)
 
-Configuração do bot de música oficial do servidor do Discord, **Hora da Pomba**. Este bot é uma instância do [evobot](https://github.com/eritislami/evobot), rodando na **Oracle Cloud**. Esse repositório guarda um [playbook](./playbook.yaml) Ansible de deploy e configuração do bot.
+Configuração dos bots do servidor do Discord, **Hora da Pomba**. Todos os bots utilizam projetos open-source, e rodam em containers Docker. O deploy é feito com Ansible.
 
-### Screenshots
-![image](https://github.com/jjpaulo2/cleiton-rasta-bot/assets/22819523/1f9d1d33-7405-467d-a5d8-6599b143c603)
+### Bots
+
+| Bot | Descrição | Playbook | Repositório |
+|-|-|-|-|
+| Cleiton Rasta | Toca músicas do **YouTube** nas salas de áudio | [`cleiton-rasta.yaml`](./ansible/cleiton-rasta.yaml) | [eritislami/evobot](https://github.com/eritislami/evobot) |
+| André Marques | Toca músicas do **Spotify** nas salas de áudio | [`andre-marques.yaml`](./ansible/andre-marques.yaml) | [codetheweb/aoede](https://github.com/codetheweb/aoede) |

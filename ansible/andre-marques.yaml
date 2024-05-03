@@ -1,0 +1,67 @@
+---
+- name: Run aoede in docker container
+  hosts: all
+  become: true
+  gather_facts: false
+
+  vars:
+    repo_url: https://github.com/codetheweb/aoede.git
+    repo_branch: 0.7.1
+    clone_path: /srv/aoede
+    container_name: andre-marques-bot
+    spotify_bot_autoplay: false
+
+  vars_prompt:
+    - name: discord_token
+      private: false
+      prompt: "Enter the DISCORD_APP_TOKEN"
+      salt_size: 8
+      unsafe: false
+
+    - name: spotify_username
+      private: false
+      prompt: "Enter the SPOTIFY_USERNAME"
+      salt_size: 8
+      unsafe: false
+
+    - name: spotify_password
+      private: false
+      prompt: "Enter the SPOTIFY_PASSWORD"
+      salt_size: 8
+      unsafe: false
+
+  tasks:
+
+  - name: Clone repository
+    async: 60
+    poll: 1
+    ansible.builtin.git:
+      repo: "{{ repo_url }}"
+      dest: "{{ clone_path }}"
+      version: "{{ repo_branch }}"
+
+  - name: Build container image
+    async: 1000
+    poll: 1
+    containers.docker.docker_image:
+      name: "{{ container_name }}"
+      path: "{{ clone_path }}"
+  
+  - name: Run container
+    async: 360
+    poll: 1
+    containers.docker.docker_container:
+      name: "{{ container_name }}"
+      image: "{{ container_name }}"
+      state: started
+      env:
+        DISCORD_TOKEN: "{{ discord_token }}"
+        SPOTIFY_USERNAME: "{{ spotify_username }}"
+        SPOTIFY_PASSWORD: "{{ spotify_password }}"
+        SPOTIFY_BOT_AUTOPLAY: "{{ spotify_bot_autoplay }}"
+  
+  - name: Clean docker old images
+    async: 30
+    poll: 1
+    containers.docker.docker_prune:
+      images: true

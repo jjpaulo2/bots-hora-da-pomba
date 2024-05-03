@@ -36,7 +36,10 @@
     poll: 1
     community.docker.docker_image:
       name: "{{ container_name }}"
-      path: "{{ clone_path }}"
+      tag: latest
+      source: build
+      build:
+        path: "{{ clone_path }}"
   
   - name: Run container
     async: 360

@@ -19,6 +19,12 @@
       salt_size: 8
       unsafe: false
 
+    - name: discord_user_id
+      private: false
+      prompt: "Enter the DISCORD_USER_ID"
+      salt_size: 8
+      unsafe: false
+
     - name: spotify_username
       private: false
       prompt: "Enter the SPOTIFY_USERNAME"
@@ -55,6 +61,7 @@
       restart_policy: always
       env:
         DISCORD_TOKEN: "{{ discord_token }}"
+        DISCORD_USER_ID: "{{ discord_user_id }}"
         SPOTIFY_USERNAME: "{{ spotify_username }}"
         SPOTIFY_PASSWORD: "{{ spotify_password }}"
         SPOTIFY_BOT_AUTOPLAY: "{{ spotify_bot_autoplay }}"

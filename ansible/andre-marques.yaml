@@ -37,8 +37,10 @@
       dest: "{{ copy_destiny_path }}"
   
   - name: Load image
-    community.docker.docker_image_load:
-      path: "{{ copy_destiny_path }}"
+    community.docker.docker_image:
+      load_path: "{{ copy_destiny_path }}"
+      source: load
+      name: aoede
 
   - name: Run container
     async: 360

@@ -7,6 +7,8 @@
   vars:
     copy_origin_path: ../build/evobot.tar.gz
     copy_destiny_path: /home/ubuntu/containers/evobot.tar.gz
+    image_version: 2.8.1
+    image_name: evobot
     container_name: cleiton-rasta-bot
     evobot_max_playlist_size: 100
     evobot_locale: pt_br
@@ -31,7 +33,8 @@
     community.docker.docker_image:
       load_path: "{{ copy_destiny_path }}"
       source: load
-      name: evobot
+      name: "{{ image_name }}"
+      tag: "{{ image_version }}"
   
   - name: Run container
     async: 360

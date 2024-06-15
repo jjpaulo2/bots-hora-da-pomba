@@ -1,4 +1,4 @@
-name: Deploy
+name: Cleiton Rasta
 
 on:
 
@@ -38,22 +38,4 @@ jobs:
           ${{ secrets.MACHINE_PUBLIC_IP }} ansible_user=${{ secrets.MACHINE_USER }}
         options: |
           --extra-vars discord_token=${{ secrets.CLEITON_RASTA_DISCORD_TOKEN }}
-          --verbose
-
-    - name: Compilando imagem do André Marques
-      run: make aoede.tar.gz
-
-    - name: Rodando André Marques
-      uses: dawidd6/action-ansible-playbook@v2
-      with:
-        playbook: ansible/andre-marques.yaml
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        inventory: |
-          [all]
-          ${{ secrets.MACHINE_PUBLIC_IP }} ansible_user=${{ secrets.MACHINE_USER }}
-        options: |
-          --extra-vars discord_token=${{ secrets.ANDRE_MARQUES_DISCORD_TOKEN }}
-          --extra-vars discord_user_id=${{ secrets.DISCORD_USER_ID }}
-          --extra-vars spotify_username=${{ secrets.SPOTIFY_USERNAME }}
-          --extra-vars spotify_password=${{ secrets.SPOTIFY_PASSWORD }}
           --verbose

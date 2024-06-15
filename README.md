@@ -1,6 +1,6 @@
 # Bots do servidor Hora da Pomba
 
-[![Deploy](https://github.com/jjpaulo2/cleiton-rasta-bot/actions/workflows/deploy.yaml/badge.svg)](https://github.com/jjpaulo2/cleiton-rasta-bot/actions/workflows/deploy.yaml)
+[![Cleiton Rasta](https://github.com/jjpaulo2/bots-hora-da-pomba/actions/workflows/cleiton-rasta.yaml/badge.svg)](https://github.com/jjpaulo2/bots-hora-da-pomba/actions/workflows/cleiton-rasta.yaml) [![André Marques](https://github.com/jjpaulo2/bots-hora-da-pomba/actions/workflows/andre-marques.yaml/badge.svg)](https://github.com/jjpaulo2/bots-hora-da-pomba/actions/workflows/andre-marques.yaml)
 
 Configuração dos bots do servidor do Discord, **Hora da Pomba**. Todos os bots utilizam projetos open-source, e rodam em containers Docker. O deploy é feito com Ansible.
 

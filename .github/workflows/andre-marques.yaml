@@ -1,0 +1,44 @@
+name: André Marques
+
+on:
+
+  workflow_dispatch:
+    inputs:
+      start_deploy:
+        type: boolean
+        description: Are you sure to start this action?
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+
+  ansible_playbook:
+
+    name: 'Executar Playbooks do Ansible'
+    if: github.event.inputs.start_deploy
+    runs-on: ubuntu-latest
+    environment: ansible
+
+    steps:
+    - name: Checkout Git Repository
+      uses: actions/checkout@v3
+
+    - name: Compilando imagem do André Marques
+      run: make aoede.tar.gz
+
+    - name: Rodando André Marques
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: ansible/andre-marques.yaml
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        inventory: |
+          [all]
+          ${{ secrets.MACHINE_PUBLIC_IP }} ansible_user=${{ secrets.MACHINE_USER }}
+        options: |
+          --extra-vars discord_token=${{ secrets.ANDRE_MARQUES_DISCORD_TOKEN }}
+          --extra-vars discord_user_id=${{ secrets.DISCORD_USER_ID }}
+          --extra-vars spotify_username=${{ secrets.SPOTIFY_USERNAME }}
+          --extra-vars spotify_password=${{ secrets.SPOTIFY_PASSWORD }}
+          --verbose

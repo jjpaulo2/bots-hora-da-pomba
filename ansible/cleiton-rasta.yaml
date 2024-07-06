@@ -7,7 +7,6 @@
   vars:
     copy_origin_path: "../build/evobot.tar.gz"
     copy_destiny_path: "/home/ubuntu/containers/evobot.tar.gz"
-    image_version: "make"
     image_name: "evobot"
     container_name: "cleiton-rasta-bot"
     evobot_max_playlist_size: "100"
@@ -38,7 +37,7 @@
     poll: 1
     community.docker.docker_container:
       name: "{{ container_name }}"
-      image: "{{ image_name }}:{{ image_version }}"
+      image: "{{ image_name }}"
       state: started
       restart_policy: always
       env:

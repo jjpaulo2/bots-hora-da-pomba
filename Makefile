@@ -6,12 +6,12 @@ BUILD_DIR = build
 
 evobot.tar.gz:
 	@git clone -b $(EVOBOT_VERSION) --single-branch $(EVOBOT_REPO) $(BUILD_DIR)/evobot
-	@docker build -t evobot:$(EVOBOT_VERSION) $(BUILD_DIR)/evobot
+	@docker build -t evobot:make $(BUILD_DIR)/evobot
 	@echo "Exporting evobot.tar.gz..."
-	@docker save evobot:$(EVOBOT_VERSION) | gzip > $(BUILD_DIR)/evobot.tar.gz
+	@docker save evobot:make | gzip > $(BUILD_DIR)/evobot.tar.gz
 
 aoede.tar.gz:
 	@git clone -b $(AOEDE_VERSION) --single-branch $(AOEDE_REPO) $(BUILD_DIR)/aoede
-	@docker build -t aoede:$(AOEDE_VERSION) $(BUILD_DIR)/aoede
+	@docker build -t aoede:make $(BUILD_DIR)/aoede
 	@echo "Exporting aoede.tar.gz..."
-	@docker save aoede:$(AOEDE_VERSION) | gzip > $(BUILD_DIR)/aoede.tar.gz
+	@docker save aoede:make | gzip > $(BUILD_DIR)/aoede.tar.gz

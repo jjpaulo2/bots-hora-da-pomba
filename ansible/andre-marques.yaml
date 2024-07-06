@@ -7,7 +7,7 @@
   vars:
     copy_origin_path: "../build/aoede.tar.gz"
     copy_destiny_path: "/home/ubuntu/containers/aoede.tar.gz"
-    image_version: "makefile"
+    image_version: "make"
     image_name: "aoede"
     container_name: "andre-marques-bot"
     spotify_bot_autoplay: "false"

@@ -23,6 +23,11 @@
 
   tasks:
 
+  - name: Delete current file
+    ansible.builtin.file:
+      path: "{{ copy_destiny_path }}"
+      state: absent
+
   - name: Copy docker image
     ansible.builtin.copy:
       src: "{{ copy_origin_path }}"

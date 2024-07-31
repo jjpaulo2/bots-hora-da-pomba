@@ -7,7 +7,7 @@
   vars:
     copy_origin_path: "../build/evobot.tar.gz"
     copy_destiny_path: "/home/ubuntu/containers/evobot.tar.gz"
-    image_name: "evobot"
+    image_name: "evobot:make"
     container_name: "cleiton-rasta-bot"
     evobot_max_playlist_size: "100"
     evobot_locale: "pt_br"
